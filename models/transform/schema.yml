@@ -1,0 +1,67 @@
+version: 2
+
+models:
+
+    - name: agg_customers
+      columns:
+          - name: customer_id
+            description: unique key for each customer from source system
+            tests:
+                - not_null
+          - name: first_name
+            description: first name of the customer
+          - name: last_name
+            description: last name of the customer
+          - name: order_status
+            description: status of the order
+            tests:
+              - accepted_values:
+                  values: ['Complete', 'Cancelled', 'Returned', 'NIL']
+          - name: total_orders
+            description: total number of orders for each customer
+            tests:
+              - not_null
+          - name: total_sales
+            description: total sales amount for the customer
+            tests:
+              - not_null
+          - name: total_units
+            description: total sales units for the customer
+            tests:
+              - not_null
+
+    - name: agg_products
+      columns:
+          - name: product_id
+            description: unique key for each product from source system
+            tests:
+                - unique
+                - not_null
+          - name: category
+            description: product category
+          - name: product_name
+            description: product name
+          - name: brand
+            description: product brand name          
+          - name: department
+            description: department of the product
+            tests:
+              - accepted_values:
+                  values: ['Men', 'Women']
+          - name: sku
+            description: unique sku of the product
+            tests:
+              - unique
+          - name: total_orders
+            description: total number of orders for each completed sales product
+            tests:
+              - not_null
+          - name: product_sales
+            description: total sales amount for the product
+          - name: sold_units
+            description: total sales units for the customer
+
+
+                  
+                  
+                  

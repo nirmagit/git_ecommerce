@@ -13,7 +13,7 @@ staging as (
 
     from source
 )
-select *
+select distinct *
     from 
         staging stg
     order by

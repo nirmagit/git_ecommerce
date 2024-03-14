@@ -11,6 +11,6 @@ with
 
         from source
     )
-select *
+select distinct *
 from staging stg
 order by stg.customer_id

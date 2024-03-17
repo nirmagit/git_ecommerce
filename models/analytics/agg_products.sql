@@ -5,21 +5,27 @@ with products as (
 orderitems as (
     select * from {{ ref('fct_orderitems') }}
 ),
+orders as (
+    select * from {{ ref('stg_orders') }}
+),
+
 
 products_sales as (
     select p.product_id
            , o.status
-           , count(o.order_id) as total_orders
-           , count(o.customer_id) as total_customers
-           , sum(o.total_price) as products_sales
-           , sum(o.units) as sold_units
-           , sum(o.sale_price) - sum(p.cost_price) as profit_or_loss
+           , count(oi.order_id) as total_orders
+           , count(oi.customer_id) as total_customers
+           , sum(oi.total_price) as products_sales
+           , sum(oi.units) as sold_units
+           , sum(oi.sale_price) - sum(p.cost_price) as profit_or_loss
     from 
         products p
         join 
-        orderitems o
-        on p.product_id = o.product_id
-    group by 1,2
+        orderitems oi
+        on p.product_id = oi.product_id
+        join orders o
+        on oi.order_id = o.order_id
+        group by 1,2
 ),
 final as (
     select p.product_id

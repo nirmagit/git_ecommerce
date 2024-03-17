@@ -19,7 +19,6 @@ total_sales as (
            , p.category
            , count(o.order_id) as total_orders
            , count(o.customer_id) as total_customers
-           , count(o.product_id) as total_products
            , sum(o.total_price) as total_sales
            , sum(o.units) as total_units
         from 

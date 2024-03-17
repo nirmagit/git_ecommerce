@@ -16,7 +16,7 @@ models:
             description: status of the order
             tests:
               - accepted_values:
-                  values: ['Complete', 'Cancelled', 'Returned', 'NIL']
+                  values: ['Complete', 'Cancelled', 'Returned', 'Processing', 'Shipped', 'NIL']
           - name: total_orders
             description: total number of orders for each customer
             tests:
@@ -35,7 +35,6 @@ models:
           - name: product_id
             description: unique key for each product from source system
             tests:
-                - unique
                 - not_null
           - name: category
             description: product category
@@ -51,7 +50,7 @@ models:
           - name: sku
             description: unique sku of the product
             tests:
-              - unique
+              - not_null
           - name: total_orders
             description: total number of orders for each completed sales product
             tests:

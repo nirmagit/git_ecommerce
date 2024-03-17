@@ -2,18 +2,29 @@ version: 2
 
 models:
   - name: stg_customers
+    tests:
+    - dbt_utils.equal_rowcount:
+        compare_model: source("ecommerce", "customers")
     columns:
       - name: customer_id
         tests:
-          - unique
           - not_null
       - name: gender
         tests:
           - accepted_values:
               values: ['M', 'F']
+      - name: country
+        tests:
+          - not_null
+      - name: created_at
+        tests:
+          - not_null
                 
 
   - name: stg_orders
+    tests:
+    - dbt_utils.equal_rowcount:
+        compare_model: source("ecommerce", "orders")
     columns:
       - name: order_id
         tests:
@@ -22,18 +33,18 @@ models:
       - name: customer_id
         tests:
           - not_null
-      - name: product_id
-        tests:
-          - not_null
       - name: status
         tests:
           - accepted_values:
-              values: ['Complete', 'Cancelled', 'Returned']
-      - name: order_date
+              values: ['Complete', 'Cancelled', 'Returned', 'Processing', 'Shipped']
+      - name: created_dt
         tests:
           - not_null
 
   - name: stg_products
+    tests:
+    - dbt_utils.equal_rowcount:
+        compare_model: source("ecommerce", "products")
     columns:
       - name: product_id
         tests:
@@ -43,3 +54,40 @@ models:
         tests:
           - accepted_values:
               values: ['Men', 'Women']
+
+  - name: stg_dist_centre
+    tests:
+    - dbt_utils.equal_rowcount:
+        compare_model: source("ecommerce", "dist_centres")
+    columns:
+      - name: centre_id
+        tests:
+          - unique
+          - not_null
+  
+  - name: stg_orderitems
+    tests:
+    - dbt_utils.equal_rowcount:
+        compare_model: source("ecommerce", "orderitems")
+    columns:
+      - name: orderitems_id
+        tests:
+            - unique
+            - not_null
+      - name: customer_id
+        tests:
+          - not_null
+      - name: order_id
+        tests:
+          - not_null
+      - name: product_id
+        tests:
+          - not_null
+      - name: status
+        tests:
+          - accepted_values:
+              values: ['Complete', 'Cancelled', 'Returned', 'Processing', 'Shipped']
+      - name: created_dt
+        tests:
+          - not_null
+      

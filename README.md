@@ -14,6 +14,11 @@ The project aims to build an end-to-end solution for managing and analyzing The 
 
 The goal of the project is to build an end-to-end solution to manage and analyze the dataset. This involves transforming the raw data into a format suitable for analysis, ensuring data integrity, implementing data security measures, and visualizing the data for insights.
 
+## Data Lineage
+
+<img width="938" alt="image" src="https://github.com/nirmagit/git_ecommerce/assets/49039478/75a0e368-937c-4db7-95a8-13f332456a43">
+
+
 ## Solution Overview
 
 ### Extract

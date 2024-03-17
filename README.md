@@ -49,6 +49,9 @@ Personally Identifiable Information (PII) such as email is masked based on user 
 
 A dashboard has been created using Looker Studio for visualizing data.
 
+<img width="952" alt="image" src="https://github.com/nirmagit/git_ecommerce/assets/49039478/36519057-5608-4090-bfed-c9d20d3b56fd">
+
+
 ## How to Run the Transformation Job
 
 Ensure raw tables are populated.

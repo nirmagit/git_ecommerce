@@ -51,6 +51,8 @@ A dashboard has been created using Looker Studio for visualizing data.
 
 <img width="952" alt="image" src="https://github.com/nirmagit/git_ecommerce/assets/49039478/36519057-5608-4090-bfed-c9d20d3b56fd">
 
+<img width="898" alt="image" src="https://github.com/nirmagit/git_ecommerce/assets/49039478/224fca32-56be-4035-80b9-1f3a102a0574">
+
 
 ## How to Run the Transformation Job
 

@@ -1,0 +1,101 @@
+version: 2
+
+models:
+
+
+    - name: dim_customers
+      tests:
+        - dbt_utils.equal_rowcount:
+            compare_model: ref('stg_customers')
+      columns:
+          - name: customer_id
+            description: unique key for each customer from source system
+            tests:
+                - not_null
+          - name: first_name
+            description: first name of the customer
+          - name: last_name
+            description: last name of the customer
+          - name: gender
+            tests:
+              - accepted_values:
+                  values: ['M', 'F']
+          - name: country
+            tests:
+              - not_null
+          - name: created_at
+            tests:
+              - not_null
+                
+
+    - name: dim_products
+      tests:
+        - dbt_utils.equal_rowcount:
+            compare_model: ref('stg_products')
+      columns:
+          - name: product_id
+            description: unique key for each product from source system
+            tests:
+                - unique
+                - not_null
+          - name: category
+            description: product category
+          - name: product_name
+            description: product name
+          - name: brand
+            description: product brand name          
+          - name: department
+            description: department of the product
+            tests:
+              - accepted_values:
+                  values: ['Men', 'Women']
+          - name: sku
+            description: unique sku of the product
+            tests:
+              - unique
+          - name: dist_centre_id
+            tests:
+              - not_null
+
+    - name: fct_orderitems
+      tests:
+        - dbt_utils.equal_rowcount:
+            compare_model: ref('stg_orderitems')
+            group_by_columns:
+              - order_id
+              - customer_id
+      columns:
+        - name: orderitems_id
+          tests:
+            - unique
+            - not_null
+        - name: customer_id
+          tests:
+            - not_null
+        - name: order_id
+          tests:
+            - not_null
+        - name: product_id
+          tests:
+            - not_null
+        - name: sale_price
+          tests:
+            - not_null
+            - warn_if_neg
+        - name: units
+          tests:
+            - not_null
+            - warn_if_neg
+        - name: total_price
+          tests:
+            - not_null
+            - warn_if_neg
+
+
+                  
+
+
+
+                  
+                  
+                  

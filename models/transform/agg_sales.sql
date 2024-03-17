@@ -1,24 +1,26 @@
 with customers as (
-    select * from {{ ref('stg_customers') }}
+    select * from {{ ref('dim_customers') }}
 ),
 
 orders as (
-    select * from {{ ref('stg_orders') }}
+    select * from {{ ref('fct_orderitems') }}
 ),
 
 products as (
-    select * from {{ ref('stg_products') }}
+    select * from {{ ref('dim_products') }}
 ),
 
 total_sales as (
     select c.country
-           , year(o.order_date) as sales_year
-           , month(o.order_date) as sales_month
+           , year(o.updated_dt) as sales_year
+           , month(o.updated_dt) as sales_month
            , o.status as order_status
            , p.brand
            , p.category
            , count(o.order_id) as total_orders
-           , sum(o.sales) as total_sales
+           , count(o.customer_id) as total_customers
+           , count(o.product_id) as total_products
+           , sum(o.total_price) as total_sales
            , sum(o.units) as total_units
         from 
             orders o
@@ -30,8 +32,8 @@ total_sales as (
             on o.product_id = p.product_id
         group by 
             c.country,
-            year(o.order_date),
-            month(o.order_date),
+            year(o.updated_dt),
+            month(o.updated_dt),
             o.status,
             p.brand,
             p.category

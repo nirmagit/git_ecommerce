@@ -42,6 +42,15 @@ models:
       +materialized: view
       # This defaults every model in the staging directory to be materialized as a view in snowflake.
       +schema: staging
+    marts:
+      +materialized: table
+      # This defaults every model in the staging directory to be materialized as a view in snowflake.
+      +schema: marts
     transform:
       +materialized: table
       +schema: transform
+
+snapshots:
+  ecommerce:
+    customers:
+      +target_schema: DBT_ECOMM

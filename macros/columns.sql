@@ -10,6 +10,11 @@
     case when rlike(nullif(trim({{column_name}}), ''), '.[a-z0-9]{1,}', 'i') then nullif(trim({{column_name}}), '') else NULL end
 {% endmacro %}
 
+{% macro is_age(age_column) %}
+    case when {{ age_column }} >= 12 and {{ age_column }} <= 90 then {{ age_column }} else 0 end
+{% endmacro %}
+
 {% macro money(col) -%}
 ::decimal(16,4)
 {%- endmacro %}
+

@@ -17,10 +17,17 @@ sources:
                 data_type: varchar
               - name: email
                 data_type: varchar
+              - name: age
+                data_type: number
               - name: gender
+                data_type: varchar
+              - name: state
+                data_type: varchar
+              - name: city
                 data_type: varchar
               - name: country
                 data_type: varchar
+              - name: created_at
 
           - name: orders
             description: One record per order. Includes cancelled and deleted orders.
@@ -29,26 +36,43 @@ sources:
                 data_type: number
               - name: user_id
                 data_type: number
+              - name: status
+                data_type: varchar
+              - name: gender
+                data_type: varchar
+              - name: created_dt
+              - name: returned_dt
+              - name: shipped_dt      
+              - name: delivered_dt
+              - name: quantity
+                data_type: number
+
+          - name: orderitems
+            description: each records defines an order items.
+            columns:
+              - name: orderitems_id
+                data_type: number
+              - name: order_id
+                data_type: number
+              - name: user_id
+                data_type: number
               - name: product_id
                 data_type: number
               - name: status
                 data_type: varchar
-              - name: created_at
-                data_type: varchar
-              - name: delivered_at
-                data_type: varchar
-              - name: returned_at
-                data_type: varchar
-              - name: sales_value
-                data_type: number
-              - name: quantity
-                data_type: number
+              - name: created_dt
+              - name: shipped_dt
+              - name: delivered_dt
+              - name: returned_dt
+              - name: sale_price
+          
         
           - name: products
             description: One record per order.
             columns:
               - name: id
                 data_type: number
+              - name: cost_price
               - name: category
                 data_type: varchar
               - name: name
@@ -56,8 +80,17 @@ sources:
               - name: brand
                 data_type: varchar
               - name: rrp
-                data_type: number
               - name: department
                 data_type: varchar
               - name: sku
+                data_type: varchar
+              - name: dist_centre_id
+                data_type: number
+
+          - name: dist_centres
+            description: distribution centres of the products
+            columns:
+              - name: centre_id 
+                data_type: number
+              - name: name
                 data_type: varchar
